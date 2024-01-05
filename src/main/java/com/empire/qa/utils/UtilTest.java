@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -19,6 +20,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -106,9 +108,18 @@ public class UtilTest extends BaseTest {
 		js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
 	}
 	
-	public static void Explicitywaitmethod(WebElement ele) {
-		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
-		wait.until(ExpectedConditions.visibilityOf(ele));
+	public static void implicitWait(WebDriver driver, int timeOut) {
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
+	public static void Explicitywaitmethod(WebElement ele) {
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(2000));
+		wait.until(ExpectedConditions.visibilityOf(ele));
+
+//	
+//	public static void explicitWait(WebDriver driver, WebElement element, int timeOut ) {
+//		WebDriverWait wait = new WebDriverWait(driver,timeOut);
+//		wait.until(ExpectedConditions.visibilityOf(element));
+//	}
+	}
 }
